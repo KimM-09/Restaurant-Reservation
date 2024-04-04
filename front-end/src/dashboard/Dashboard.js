@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { listReservations } from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { previous, today, next } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ReservationList from "../reservations/reservation.list";
+import TablesList from "../tables/tables.list";
+
 
 /**
  * Defines the dashboard page.
@@ -14,6 +16,7 @@ import ReservationList from "../reservations/reservation.list";
  */
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
+  const [tables, setTables ] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
 
   const dateQuery = useQuery().get("date");
@@ -31,8 +34,24 @@ function Dashboard({ date }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    listTables()
+      .then(setTables)
+      .catch(setReservationsError)
     return () => abortController.abort();
   }
+
+  // async function finishHandler(table_id) {
+  //   const abortController = new AbortController();
+  //   const result = wimdow.confirm(
+  //     "Are you sure? This cannot be undone."
+  //   );
+
+  //   if(result) {
+  //     await finishTable(table_id, abortController.signal);
+  //     loadDashboard();
+  //   }
+  //   return () => abortController.abort();
+  // }
 
   return (
     <main>
@@ -62,7 +81,9 @@ function Dashboard({ date }) {
       <ReservationList
         reservations={reservations}
         />
-      {JSON.stringify(reservations)}
+      <TablesList
+        tables={tables}
+        />
     </main>
   );
 }

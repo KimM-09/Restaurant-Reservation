@@ -3,24 +3,32 @@ import { useHistory } from "react-router-dom";
 
 
 function ReservationForm(props) {
-    const { reservationInfo, setReservationInfo, handleSubmit } = props;
+    const { reservation, setReservation, submitHandler } = props;
     const history = useHistory();
 
-    const handleChange = ( event ) => {
-        setReservationInfo({
-            ...reservationInfo,
-            [event.target.name]: event.target.value,
-        });
-    };
+    const handleChange = ({ target: { name, value } }) => {
+        if(name === "people") {
+            setReservation((previousReservation) => ({
+                ...previousReservation,
+                [name]: Number(value),
+            }));
+        } else {
+            setReservation((previousReservation) => ({
+                ...previousReservation,
+                [name]: value,
+            }));
+        }
+    }
+   
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitHandler}>
             <label htmlFor="first_name">First Name</label>
             <input
             id="first_name"
             name="first_name"
             type="text"
-            value={reservationInfo["first_name"]}
+            value={reservation.first_name}
             onChange={handleChange}
             required
             placeholder="First Name"
@@ -31,7 +39,7 @@ function ReservationForm(props) {
             id="last_name"
             name="last_name"
             type="text"
-            value={reservationInfo["last_name"]}
+            value={reservation.last_name}
             onChange={handleChange}
             required
             placeholder="Last Name"
@@ -42,10 +50,10 @@ function ReservationForm(props) {
             id="mobile_number"
             name="mobile_number"
             type="tel"
-            value={reservationInfo["mobile_number"]}
+            value={reservation.mobile_number}
             onChange={handleChange}
             required
-            placeholder="Phone Number"
+            placeholder="(xxx) xxx-xxxx"
             className="form-control"
             />
             <label htmlFor="reservation_date">Reservation Date</label>
@@ -53,7 +61,7 @@ function ReservationForm(props) {
             id="reservation_date"
             name="reservation_date"
             type="date"
-            value={reservationInfo["reservation_date"]}
+           value={reservation.reservation_date}
             onChange={handleChange}
             required
             placeholder="Reservation Date"
@@ -64,7 +72,7 @@ function ReservationForm(props) {
             id="reservation_time"
             name="reservation_time"
             type="time"
-            value={reservationInfo["reservation_time"]}
+            value={reservation.reservation_time}
             onChange={handleChange}
             placeholder="Reservation Time"
             className="form-control"
@@ -74,18 +82,20 @@ function ReservationForm(props) {
             id="people"
             name="people"
             type="number"
-            value={reservationInfo["people"]}
+            value={reservation.people}
             onChange={handleChange}
             required
             placeholder="Number of Guests"
             className="form-control"
             />
+          <div>
             <button type="button" onClick={() => history.goBack()} className="btn btn-danger mr-2">
                 Cancel
             </button>
             <button type="submit" className="btn btn-primary mr-2">
                 Submit
             </button>
+          </div>
         </form>
     )
 }
