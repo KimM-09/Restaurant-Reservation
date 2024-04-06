@@ -8,13 +8,15 @@ function ReservationDetails(props) {
 
   async function handleCancel(reservation_id) {
     const abortController = new AbortController();
-    const result = window.confirm(
-      "Are you sure you want to cancel? This cannot be undone."
-    );
-    if(result) {
+      const result = window.confirm(
+        "Do you want to cancel this reservation? This cannot be undone."
+      );
+
+    if (result) {
       await updateStatus(reservation_id, "cancelled", abortController.signal);
       history.go(0)
     }
+
     return () => abortController.abort();
   }
 

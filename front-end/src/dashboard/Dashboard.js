@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { listReservations, listTables } from "../utils/api";
+import { listReservations, listTables, finish } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { previous, today, next } from "../utils/date-time";
 import useQuery from "../utils/useQuery";
 import ReservationList from "../reservations/reservation.list";
 import TablesList from "../tables/tables.list";
+
 
 
 /**
@@ -40,18 +41,18 @@ function Dashboard({ date }) {
     return () => abortController.abort();
   }
 
-  // async function finishHandler(table_id) {
-  //   const abortController = new AbortController();
-  //   const result = wimdow.confirm(
-  //     "Are you sure? This cannot be undone."
-  //   );
+  async function finishHandler(table_id) {
+    const abortController = new AbortController();
+    const result = window.confirm(
+      "Is this table ready to seat new guests? This cannot be undone."
+    );
 
-  //   if(result) {
-  //     await finishTable(table_id, abortController.signal);
-  //     loadDashboard();
-  //   }
-  //   return () => abortController.abort();
-  // }
+    if(result) {
+      await finish(table_id, abortController.signal);
+      loadDashboard();
+    }
+    return () => abortController.abort();
+  }
 
   return (
     <main>
@@ -82,7 +83,7 @@ function Dashboard({ date }) {
         reservations={reservations}
         />
       <TablesList
-        tables={tables}
+        tables={tables} finishHandler={finishHandler}
         />
     </main>
   );

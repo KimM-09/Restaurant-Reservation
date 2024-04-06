@@ -27,12 +27,12 @@ function read(reservation_id) {
 }
 
 
-async function update(updatedRes) {
+async function update(updatedReservation) {
     return knex("reservations")
-    .select("*")
-    .where({ reservation_id: updatedRes.reservation_id })
-    .update(updatedRes, "*")
-    .then((updated) => updated[0]);
+        .select("*")
+        .where({ reservation_id: updatedReservation.reservation_id })
+        .update(updatedReservation, "*")
+        .then((result) => result[0]);
 }
 
 async function updateStatus(reservation_id, status) {
@@ -46,7 +46,7 @@ async function updateStatus(reservation_id, status) {
 async function search(mobile_number) {
     return knex("reservations")
     .whereRaw(
-        "translate(mobile_number, '()-', '') like ?",
+        "translate(mobile_number, '()-','') like ?",
         `%${mobile_number.replace(/\D/g, "")}%`
     )
     .orderBy("reservation_date");
