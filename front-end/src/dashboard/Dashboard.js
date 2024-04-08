@@ -56,26 +56,28 @@ function Dashboard({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
+      <div className="card my-3 border-secondary">
+      <h1 className="card-header text-white bg-dark">Dashboard</h1>
+      <div className="card-body">
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={reservationsError} />
       
       <Link 
-        class-name="btn btn-dark"
+        class-name="btn btn-outline-dark"
         to={`/dashboard?date=${previous(date)}`}>
-      <button type="button" class="btn btn-primary mr-2">
+      <button type="button" class="btn btn-outline-dark mr-2">
         Previous
       </button>
       </Link>
       <Link to={`/dashboard?date=${today()}`}>
-      <button type="button" class="btn btn-dark mr-2">
+      <button type="button" class="btn btn-outline-dark mr-2">
         Today
       </button>
       </Link>
       <Link to={`/dashboard?date=${next(date)}`}>
-      <button type="button" class="btn btn-primary mr-2">
+      <button type="button" class="btn btn-outline-dark mr-2">
         Next
       </button>
       </Link>
@@ -85,6 +87,8 @@ function Dashboard({ date }) {
       <TablesList
         tables={tables} finishHandler={finishHandler}
         />
+        </div>
+        </div>
     </main>
   );
 }

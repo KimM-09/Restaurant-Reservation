@@ -38,7 +38,6 @@ function CreateReservation(){
     return (
         <div>
             <ErrorAlert errors={resErrors} />
-            <h1>Create Reservation</h1>
             <ReservationForm
                 reservation={reservation}
                 setReservation={setReservation}

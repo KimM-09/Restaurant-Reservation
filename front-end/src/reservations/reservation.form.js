@@ -22,7 +22,11 @@ function ReservationForm(props) {
    
 
     return (
+        <div className="card my-3 border-dark">
+        <h3 className="card-header text-white bg-dark">New Reservation</h3>
+            <div className="card-body">
         <form onSubmit={submitHandler}>
+        <div className="form-group">
             <label htmlFor="first_name">First Name</label>
             <input
             id="first_name"
@@ -88,15 +92,19 @@ function ReservationForm(props) {
             placeholder="Number of Guests"
             className="form-control"
             />
+            
           <div>
-            <button type="button" onClick={() => history.goBack()} className="btn btn-danger mr-2">
+            <button type="button" onClick={() => history.goBack()} className="btn btn-outline-danger mr-2 my-3">
                 Cancel
             </button>
-            <button type="submit" className="btn btn-primary mr-2">
+            <button type="submit" className="btn btn-outline-dark mr-2">
                 Submit
             </button>
+            </div>
           </div>
         </form>
+        </div>
+        </div>
     )
 }
 

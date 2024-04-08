@@ -40,7 +40,7 @@ function Search() {
 
     return(
         <div className="card my-3 border-secondary">
-            <h3 className="card-header text-white bg-secondary">Search</h3>
+            <h3 className="card-header text-white bg-dark">Search</h3>
             <div className="card-body">
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
@@ -56,8 +56,12 @@ function Search() {
                             required={true}
                         />
                         <div>
-                            <button type="button" className="btn btn-secondary m-2" onClick={()=> history.goBack()}> Cancel </button>
-                            <button type="submit" className="btn btn-primary m-2"> Find </button>
+                            <button type="button" className="btn btn-outline-danger m-2" onClick={()=> history.goBack()}> 
+                                Cancel 
+                            </button>
+                            <button type="submit" className="btn btn-outline-secondary m-2"> 
+                                Find 
+                            </button>
                         </div>
                     </div>
                 </form>

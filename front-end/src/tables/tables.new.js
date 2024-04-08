@@ -49,7 +49,7 @@ function CreateTable() {
         <div>
             <ErrorAlert errors={tableErrors} />
             <div className="card my-3 border-secondary">
-                <h3 className="card-header text-white bg-primary">New Table</h3>
+                <h3 className="card-header text-white bg-dark">New Table</h3>
                 <div className="card-body">
                     <form onSubmit={submitHandler}>
                         <div className="form-group">
@@ -76,8 +76,12 @@ function CreateTable() {
                             required={true}
                         />
                         <div>
-                            <button type="button" className="btn btn-secondary m-2" onClick={()=> history.goBack()}> Cancel </button>
-                            <button type="submit" className="btn btn-primary m-2"> Submit </button>
+                            <button type="button" className="btn btn-outline-danger m-2" onClick={()=> history.goBack()}>
+                                Cancel 
+                            </button>
+                            <button type="submit" className="btn btn-outline-dark m-2"> 
+                                Submit 
+                            </button>
                         </div>
                         </div>
                     </form>
