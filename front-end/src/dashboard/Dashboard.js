@@ -60,7 +60,7 @@ function Dashboard({ date }) {
       <h1 className="card-header text-white bg-dark">Dashboard</h1>
       <div className="card-body">
       <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+        <h4 className="mb-0">Reservations for: {date}</h4>
       </div>
       <ErrorAlert error={reservationsError} />
       

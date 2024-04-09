@@ -53,7 +53,7 @@ function ReservationForm(props) {
             <input
             id="mobile_number"
             name="mobile_number"
-            type="tel"
+            type="number"
             value={reservation.mobile_number}
             onChange={handleChange}
             required
